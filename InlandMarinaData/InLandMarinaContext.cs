@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,29 +8,40 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace InlandMarinaData
 {
-  //CONTEXT CLASS(WITH SEED DATA)//
+    //CONTEXT CLASS(WITH SEED DATA)//
 
-public class InlandMarinaContext : DbContext
-	{
+    public class InlandMarinaContext : IdentityDbContext
+    {
         public InlandMarinaContext(DbContextOptions<InlandMarinaContext> options)
-        : base(options)
+            : base(options)
         {
         }
-       
 
-		public DbSet<Customer> Customers { get; set; }
+
+        public DbSet<Customer> Customers { get; set; }
 		public DbSet<Dock> Docks { get; set; }
 		public DbSet<Slip> Slips { get; set; }
 		public DbSet<Lease> Leases { get; set; }
 
 		//protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		//{
-		//	//Change the connection string here for your home computer/lab computer
-		//	optionsBuilder.UseSqlServer(@"Server=localhost\sqlexpress;
-  //                                        Database=InlandMarina;
-  //                                        Trusted_Connection=True;
-		//								  Encrypt=False;");
-		//}
+  //          if (!optionsBuilder.IsConfigured)
+  //          {
+  //              optionsBuilder.UseSqlServer(@"Server=localhost\sqlexpress;
+  //                                    Database=InlandMarina;
+  //                                    Trusted_Connection=True;
+  //                                    Encrypt=False;");
+  //          }
+
+
+
+
+            //	//Change the connection string here for your home computer/lab computer
+            //	optionsBuilder.UseSqlServer(@"Server=localhost\sqlexpress;
+            //                                        Database=InlandMarina;
+            //                                        Trusted_Connection=True;
+            //								  Encrypt=False;");
+        //}
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{

@@ -18,6 +18,8 @@ namespace InlandMarinaData
 
         [Required]
         [StringLength(15)]
+        [RegularExpression(@"^\d{3}-\d{3}-\d{4}$", ErrorMessage = "Phone must be in the format XXX-XXX-XXXX")]
+
         public string Phone { get; set; }
 
         [Required]
