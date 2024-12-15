@@ -13,6 +13,7 @@ namespace InlandMarinaData
         public int ID { get; set; }
         public int SlipID { get; set; }
         public int CustomerID { get; set; }
+        public DateTime LeaseDate { get; set; } // Added lease date to track when a lease created 
 
         //navigation properties
         public virtual Customer Customer { get; set; }

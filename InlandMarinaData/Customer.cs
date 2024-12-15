@@ -26,6 +26,8 @@ namespace InlandMarinaData
         [StringLength(30)]
         public string City { get; set; }
 
+        public string? AspNetUserId { get; set; }
+
         // navigation property
         public virtual ICollection<Lease> Leases { get; set; }
     }

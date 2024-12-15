@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using InlandMarinaData;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -47,8 +48,23 @@ namespace InlandMarinaData
 		{
 			base.OnModelCreating(modelBuilder);
 
-			//seed data created here
-			modelBuilder.Entity<Customer>().HasData(
+
+            // Configure Slip-Dock relationship
+            modelBuilder.Entity<Slip>()
+                .HasOne(s => s.Dock)
+                .WithMany(d => d.Slips)
+                .HasForeignKey(s => s.DockID)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // Configure Slip-Lease relationship
+            modelBuilder.Entity<Slip>()
+                .HasMany(s => s.Leases)
+                .WithOne(l => l.Slip)
+                .HasForeignKey(l => l.SlipID)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            //seed data created here
+            modelBuilder.Entity<Customer>().HasData(
 				new Customer { ID = 1, FirstName = "John", LastName = "Doe", Phone = "265-555-1212", City = "Phoenix" },
 				new Customer { ID = 2, FirstName = "Sara", LastName = "Williams", Phone = "403-555-9585", City = "Calgary" },
 				new Customer { ID = 3, FirstName = "Ken", LastName = "Wong", Phone = "802-555-3214", City = "Kansas City" }
